@@ -1,21 +1,22 @@
 clear all;
-
+tic;
 %% model parameters, as defined in the paper
 M = 100; % data dimension
 K = 0.05 * M; % number of factors
-UNIFORM = 0; % 1 = model has uniform residual variances; 0 = models has arbitrary residual variances
+UNIFORM = 1; % 1 = model has uniform residual variances; 0 = models has arbitrary residual variances
 scan_N = [ 0.25 0.5 1 2 ] * M; %% the sizes of datasets
 default_lambda = [ 0.8 1.2 1.6 2 ] * M ; % the corresponding lambda to use
 default_K = [ K-3 K-2 K-1 K ]; % the corresponding K to use
 N_N = length( scan_N ); % number of scan points
 TRIAL = 100; % number of simulation trials
-sigma_f = 5; % magnitude factor loadings
+mu_f = -1; % factor mean
+sigma_f = 2; % factor standard deviation
 sigma_r = 0.8; % magnitude of variation among residual variances
 
 %% set random seed for data generation; can be safely ignored
 rand_seed = 0;
 rand_stream =  RandStream('mcg16807', 'Seed', rand_seed) ;
-RandStream.setDefaultStream( rand_stream );
+RandStream.setGlobalStream( rand_stream );
 
 %% log likelihood record keeper
 UTM_llh = zeros(TRIAL, N_N);
@@ -28,7 +29,7 @@ STM_llh = zeros(TRIAL, N_N);
 
 %% begin of simulation
 for trial = 1 : TRIAL
-    [ X, Sigma_s ] = generate_data( M, K, scan_N(N_N), UNIFORM, sigma_f, sigma_r ); % X=data set; Sigma_s = true covariance matrix
+    [ X, Sigma_s ] = generate_data( M, scan_N(N_N), UNIFORM, mu_f, sigma_f, sigma_r ); % X=data set; Sigma_s = true covariance matrix
             
     %% scan over different data sizes
     for index_N = 1 : N_N
@@ -88,3 +89,5 @@ end
 xlabel('log(N/M)');
 ylabel('log likelihood');
 legend(legend_str);
+
+toc
