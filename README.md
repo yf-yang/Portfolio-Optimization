@@ -8,14 +8,16 @@ The codes are on the basis of Yihao Kao's [RPCA code](http://www.yhkao.com/RPCA-
 ### Problem Formulation
 
 Consider an optimization problem:
-$$
-\max_{\mathbf{z \in \mathbb{R}^p}} \mathbf{c^Tz -(z^Ty)^2}
-$$
-Here $\mathbf{y} \in \mathbb{R}^p​$ could be considered as centered stock returns, $\mathbf{z}\in\mathbb{R}^p​$ are stock holding decisions for $p​$ stocks and $\mathbf{c} \in \mathbb{R}^p​$ are combinations of expected stock returns and other costs. The term $\mathbf{(z^Ty)^2}​$ is the total risk and the term $\mathbf{c^Tz}​$ is the expected revenue. By maximizing the weighted sum (the weight could be merged into $\mathbf{c}​$, so it is ignored), we can get a decision $\mathbf{z}​$.
+<p align="center">
+  <img  src="http://latex.codecogs.com/svg.latex?\max_{\mathbf{z\in\mathbb{R}^p}}\mathbf{c^Tz-(z^Ty)^2}">
+</p>
 
-With history data $\{\mathbf{y_1, y_2,\dots,y_N}\}$, the problem could be solved via efficient data driven decision making approaches such as PPCA <sup>1</sup>, RPCA<sup>2</sup>and DPCA<sup>3</sup>. These methods could be considered  as sample average approximation (SAA) approaches.
 
-Furthermore, inspired by kernel methods<sup>456</sup>, suppose we can access a set of additional history feature data $\{\mathbf{x_1, x_2,\dots,x_N}\}$ along with $\mathbf{y}$s, given a new feature observation $\mathbf{x}​$, we try to improve the out-of-sample performance with additional information.
+Here ![](http://latex.codecogs.com/svg.latex?\\mathbf{y}\\in\\mathbb{R}^p)could be considered as centered stock returns, ![](http://latex.codecogs.com/svg.latex?\\mathbf{z}\\in\\mathbb{R}^p)are stock holding decisions for ![](http://latex.codecogs.com/svg.latex?p​)stocks and ![](http://latex.codecogs.com/svg.latex?\\mathbf{c}\\in\\mathbb{R}^p​)are combinations of expected stock returns and other costs. The term ![](http://latex.codecogs.com/svg.latex?\\mathbf{(z^Ty)^2}​)is the total risk and the term ![](http://latex.codecogs.com/svg.latex?\\mathbf{c^Tz}​)is the expected revenue. By maximizing the weighted sum (the weight could be merged into ![](http://latex.codecogs.com/svg.latex?\\mathbf{c}​), so it is ignored), we can get a decision ![](http://latex.codecogs.com/svg.latex?\\mathbf{z}​).
+
+With history data ![](http://latex.codecogs.com/svg.latex?\\{\\mathbf{y_1,y_2,\\dots,y_N}\\}), the problem could be solved via efficient data driven decision making approaches such as PPCA <sup>1</sup>, RPCA<sup>2</sup>and DPCA<sup>3</sup>. These methods could be considered  as sample average approximation (SAA) approaches.
+
+Furthermore, inspired by kernel methods<sup>456</sup>, suppose we can access a set of additional history feature data ![](http://latex.codecogs.com/svg.latex?\\{\\mathbf{x_1,x_2,\\dots,x_N}\\})along with ![](http://latex.codecogs.com/svg.latex?\\mathbf{y})s, given a new feature observation ![](http://latex.codecogs.com/svg.latex?\\mathbf{x}​), we try to improve the out-of-sample performance with additional information.
 
 ### References
 
