@@ -56,40 +56,40 @@ for trial = 1 : TRIAL
         if UNIFORM == 1
             %% URM
             [ Sigma_URM, F_URM, R_URM ] = compute_URM( Sigma_SAM, train_K );
-            Sigma_URM_inv = inv(Sigma_URM);
+            U_URM = 0.5 * inv(Sigma_URM) * c;
             URM_llh( trial, index_N ) = -0.5 * ( M * log(2*pi) + logdet(Sigma_URM) + trace(Sigma_URM\Sigma_s) );
-            URM_obj( trial, index_N ) = 0.5 * c' * Sigma_URM_inv * c - 0.25 * c' * Sigma_URM_inv * Sigma_s * Sigma_URM_inv * c ) );
+            URM_obj( trial, index_N ) = c' * U_URM - U_URM' * Sigma_s * U_URM;
            
             %% UTM
             [ Sigma_UTM, F_UTM, R_UTM ] = compute_UTM( Sigma_SAM, train_lambda, N );
-            Sigma_UTM_inv = inv(Sigma_UTM);
+            U_UTM = 0.5 * inv(Sigma_UTM) * c;
             UTM_llh( trial, index_N ) = -0.5 * ( M * log(2*pi) + logdet(Sigma_UTM) + trace(Sigma_UTM\Sigma_s) );
-            UTM_obj( trial, index_N ) = 0.5 * c' * Sigma_UTM_inv * c - 0.25 * c' * Sigma_UTM_inv * Sigma_s * Sigma_UTM_inv * c ) );
+            UTM_obj( trial, index_N ) = c' * U_UTM - U_UTM' * Sigma_s * U_UTM;
             
         else   
             %% MRH
             [ Sigma_MRH, F_MRH, R_MRH ] = compute_MRH( Sigma_SAM, train_K );
-            Sigma_MRH_inv = inv(Sigma_MRH);
+            U_MRH = 0.5 * inv(Sigma_MRH) * c;
             MRH_llh( trial, index_N ) = -0.5 * ( M * log(2*pi) + logdet(Sigma_MRH) + trace(Sigma_MRH\Sigma_s) );
-            MRH_obj( trial, index_N ) = 0.5 * c' * Sigma_MRH_inv * c - 0.25 * c' * Sigma_MRH_inv * Sigma_s * Sigma_MRH_inv * c ) );
+            MRH_obj( trial, index_N ) = c' * U_MRH - U_MRH' * Sigma_s * U_MRH;
              
             %% EM
             [ Sigma_EM, F_EM, R_EM ] = compute_EM( Sigma_SAM, train_K );
-            Sigma_EM_inv = inv(Sigma_EM);
+            U_EM = 0.5 * inv(Sigma_EM) * c;
             EM_llh( trial, index_N ) = -0.5 * ( M * log(2*pi) + logdet(Sigma_EM) + trace(Sigma_EM\Sigma_s) );
-            EM_obj( trial, index_N ) = 0.5 * c' * Sigma_EM_inv * c - 0.25 * c' * Sigma_EM_inv * Sigma_s * Sigma_EM_inv * c ) );
+            EM_obj( trial, index_N ) = c' * U_EM - U_EM' * Sigma_s * U_EM;
             
             %% TM
             [ Sigma_TM, F_TM, R_TM ] = compute_TM( Sigma_SAM, train_lambda, N );
-            Sigma_TM_inv = inv(Sigma_TM);
+            U_TM = 0.5 * inv(Sigma_TM) * c;
             TM_llh( trial, index_N ) = -0.5 * ( M * log(2*pi) + logdet(Sigma_TM) + trace(Sigma_TM\Sigma_s) );
-            TM_obj( trial, index_N ) = 0.5 * c' * Sigma_TM_inv * c - 0.25 * c' * Sigma_TM_inv * Sigma_s * Sigma_TM_inv * c ) );
+            TM_obj( trial, index_N ) = c' * U_TM - U_TM' * Sigma_s * U_TM;
             
             %% STM
             [ Sigma_STM, F_STM, R_STM ] = compute_STM( Sigma_SAM, train_lambda, N );
-            Sigma_STM_inv = inv(Sigma_STM);
+            U_STM = 0.5 * inv(Sigma_STM) * c;
             STM_llh( trial, index_N ) = -0.5 * ( M * log(2*pi) + logdet(Sigma_STM) + trace(Sigma_STM\Sigma_s) );
-            STM_obj( trial, index_N ) = 0.5 * c' * Sigma_STM_inv * c - 0.25 * c' * Sigma_STM_inv * Sigma_s * Sigma_STM_inv * c ) );
+            STM_obj( trial, index_N ) = c' * U_STM - U_STM' * Sigma_s * U_STM;
            
         end       
     end    

@@ -16,11 +16,12 @@ f = sort( abs(f), 'descend' );
 
 %% generate c
 c = randn(M, 1);
-p = randn(20, 1) * sigma_p
+p = randn(20, 1) * sigma_p;
 for d = 1 : 20
     c = c + p(d)*Psi(:,d);
 end
- 
+c = c / norm(c);
+
 %% generate residuals (uniform / inverse-gamma)
 if uniform == 1
     R_s = ones(M ,1);
