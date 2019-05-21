@@ -3,7 +3,7 @@ clear all;
 %% model parameters, as defined in the paper
 M = 100; % data dimension
 K = 0.05 * M; % number of factors
-UNIFORM = 0; % 1 = model has uniform residual variances; 0 = models has arbitrary residual variances
+UNIFORM = 1; % 1 = model has uniform residual variances; 0 = models has arbitrary residual variances
 scan_N = [ 0.25 0.5 1 2 ] * M; %% the sizes of datasets
 default_lambda = [ 0.8 1.2 1.6 2 ] * M ; % the corresponding lambda to use
 default_K = [ K-3 K-2 K-1 K ]; % the corresponding K to use
@@ -13,9 +13,10 @@ sigma_f = 5; % magnitude factor loadings
 sigma_r = 0.8; % magnitude of variation among residual variances
 
 %% set random seed for data generation; can be safely ignored
-rand_seed = 0;
+rand_seed = randi(10000);
+fprintf('seed: %d\n', rand_seed);
 rand_stream =  RandStream('mcg16807', 'Seed', rand_seed) ;
-RandStream.setDefaultStream( rand_stream );
+RandStream.setGlobalStream( rand_stream );
 
 %% log likelihood record keeper
 UTM_llh = zeros(TRIAL, N_N);
