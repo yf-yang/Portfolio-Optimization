@@ -1,4 +1,4 @@
-function [ X, Sigma_s, c, F_s, R_s ] = generate_data( M, N, uniform, mu_f, sigma_f, sigma_p, sigma_r )
+function [ X, Sigma_s, c, F_s, R_s ] = generate_data( M, N, uniform, objective, mu_f, sigma_f, sigma_p, sigma_r )
 
 %% generate basis ( no effect if isotropic noise is assumed )
 Psi = randn(M, M);
@@ -16,9 +16,11 @@ f = sort( abs(f), 'descend' );
 
 %% generate c
 c = randn(M, 1);
-p = randn(20, 1) * sigma_p;
-for d = 1 : 20
-    c = c + p(d)*Psi(:,d);
+if objective == 1
+    p = randn(20, 1) * sigma_p;
+    for d = 1 : 20
+        c = c + p(d)*Psi(:,d);
+    end
 end
 c = c / norm(c);
 

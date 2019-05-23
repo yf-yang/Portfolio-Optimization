@@ -2,8 +2,9 @@ clear all;
 tic;
 %% model parameters, as defined in the paper
 M = 100; % data dimension
-K = 0.05 * M; % number of factors
+K = 0.1 * M; % number of factors
 UNIFORM = 1; % 1 = model has uniform residual variances; 0 = models has arbitrary residual variances
+OBJECTIVE = 0; % 0 = independent objective; 1 = aligned objective
 scan_N = [ 0.25 0.5 1 2 ] * M; %% the sizes of datasets
 default_lambda = [ 0.8 1.2 1.6 2 ] * M; % the corresponding lambda to use
 default_eps = [ 8 6 4 2 ]; % the corresponding epsilon to use
@@ -39,7 +40,7 @@ STM_obj = zeros(TRIAL, N_N);
 
 %% begin of simulation
 for trial = 1 : TRIAL
-    [ X, Sigma_s, c ] = generate_data( M, scan_N(N_N), UNIFORM, mu_f, sigma_f, sigma_p, sigma_r ); % X=data set; Sigma_s = true covariance matrix
+    [ X, Sigma_s, c ] = generate_data( M, scan_N(N_N), UNIFORM, OBJECTIVE, mu_f, sigma_f, sigma_p, sigma_r ); % X=data set; Sigma_s = true covariance matrix
             
     %% scan over different data sizes
     for index_N = 1 : N_N
