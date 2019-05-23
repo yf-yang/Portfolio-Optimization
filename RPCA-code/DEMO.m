@@ -9,7 +9,7 @@ default_lambda = [ 0.8 1.2 1.6 2 ] * M ; % the corresponding lambda to use
 default_K = [ K-3 K-2 K-1 K ]; % the corresponding K to use
 N_N = length( scan_N ); % number of scan points
 TRIAL = 100; % number of simulation trials
-sigma_f = 5; % magnitude factor loadings
+sigma_f = 5; % magnitude factor loa  dings
 sigma_r = 0.8; % magnitude of variation among residual variances
 
 %% set random seed for data generation; can be safely ignored

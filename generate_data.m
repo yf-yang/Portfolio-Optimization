@@ -12,11 +12,12 @@ end
 %% generate factor coefficients
 f = randn(M, 1) * sigma_f + mu_f;
 f = exp(f);
-f = sort( abs(f), 'descend' );
+f = sort( f, 'descend' );
 
 %% generate c
 c = randn(M, 1);
 if objective == 1
+%     c = c * 20;
     p = randn(20, 1) * sigma_p;
     for d = 1 : 20
         c = c + p(d)*Psi(:,d);
@@ -35,10 +36,11 @@ R_sqrt = sqrt(R_s);
 R_s = diag(R_s);
 
 %% generate Sigma_s
-Fhalf = zeros( M, M );
-for d = 1 : M
-    Fhalf(:,d) = f(d)*Psi(:,d);
-end
+% Fhalf = zeros( M, M );
+% for d = 1 : M
+%     Fhalf(:,d) = f(d)*Psi(:,d);
+% end
+Fhalf = repmat(f', [M 1]).*Psi;
 F_s = Fhalf * Fhalf';
 Sigma_s = F_s + R_s;
 
