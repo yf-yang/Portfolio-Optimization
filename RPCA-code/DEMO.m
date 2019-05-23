@@ -1,7 +1,7 @@
 clear all;
 
 %% model parameters, as defined in the paper
-M = 100; % data dimension
+M = 200; % data dimension
 K = 0.05 * M; % number of factors
 UNIFORM = 1; % 1 = model has uniform residual variances; 0 = models has arbitrary residual variances
 scan_N = [ 0.25 0.5 1 2 ] * M; %% the sizes of datasets
