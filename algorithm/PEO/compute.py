@@ -26,9 +26,6 @@ def compute(Sigma_SAM, c, lamb, gamma, N):
         posdef = is_pos_def(Sigma_new)
         
         objective = f(c, Sigma_SAM, gamma, lamb, G, v)
-        g = gamma * c.dot(Sigma_inv).dot(c) - 0.5 * c.dot(Sigma_inv).dot(Sigma_SAM).dot(Sigma_inv).dot(c)
-        llh = np.linalg.slogdet(Sigma_inv)[1] - np.trace(Sigma_inv.dot(Sigma_SAM)) 
-        tr = - lamb * np.trace(G)
         if posdef:
             alpha = 1
             while True:
